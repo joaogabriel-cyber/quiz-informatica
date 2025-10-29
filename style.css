@@ -1,0 +1,364 @@
+/* Paleta de Cores:
+   Fundo: #1c273a (azul escuro profundo)
+   Acento/Primário: #00bcd4 (ciano vibrante / neon)
+   Secundário/Contraste: #ffeb3b (amarelo neon)
+   Erro/Alerta: #ff5252 (vermelho)
+   Acerto: #4CAF50 (verde)
+*/
+
+/* Estilos Gerais */
+body {
+    font-family: 'Poppins', sans-serif; /* Fonte moderna (necessita importação no HTML) */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #1c273a;
+    color: #f0f8ff; /* Texto principal claro */
+    /* Fundo com gradiente para profundidade */
+    background-image: linear-gradient(135deg, #1c273a 0%, #0d131f 100%);
+    padding: 20px;
+}
+
+.container {
+    background: rgba(44, 62, 80, 0.95); /* Fundo semi-transparente escuro */
+    padding: 35px;
+    border-radius: 15px;
+    /* Sombra e Brilho Neon (Ciano) */
+    box-shadow: 0 15px 35px rgba(0, 188, 212, 0.3), 0 0 0 5px rgba(0, 188, 212, 0.5);
+    width: 90%;
+    max-width: 600px;
+    text-align: center;
+    border: 1px solid #00bcd4;
+}
+
+h1 {
+    color: #ffeb3b; /* Amarelo neon para títulos principais */
+    margin-bottom: 15px;
+    text-shadow: 0 0 10px #ffeb3b; /* Efeito neon no título */
+    font-size: 2.2em;
+}
+
+h2 {
+    color: #00bcd4;
+    margin-bottom: 25px;
+    text-shadow: 0 0 8px #00bcd4; /* Efeito neon em subtítulos */
+}
+
+.screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.description, .info-text {
+    color: rgba(240, 248, 255, 0.8);
+    margin-bottom: 20px;
+}
+
+/* --- Estilos de Input e Botões --- */
+.input-container {
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+#quiz-player-name {
+    padding: 12px;
+    width: calc(100% - 24px); 
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    background-color: #34495e;
+    color: #f0f8ff;
+    border: 2px solid transparent;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+#quiz-player-name:focus {
+    border-color: #00bcd4;
+    box-shadow: 0 0 10px #00bcd4;
+    outline: none;
+}
+
+button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    transition: transform 0.2s, box-shadow 0.3s, opacity 0.3s;
+    text-transform: uppercase;
+    width: 100%;
+}
+
+button:hover:not(:disabled) {
+    transform: translateY(-3px); /* Efeito de "levantar" */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.main-btn {
+    background-color: #ffeb3b; /* Amarelo neon para ação principal */
+    color: #1c273a;
+}
+
+.main-btn:hover {
+    background-color: #fffa80;
+    box-shadow: 0 0 15px #ffeb3b;
+}
+
+.secondary-btn {
+    background-color: #34495e; /* Botão de ação secundária/neutra */
+    color: #f0f8ff;
+    margin-top: 10px;
+}
+
+.secondary-btn:hover {
+    background-color: #496684;
+}
+
+/* --- TELA DE JOGO --- */
+
+.header-info {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #00bcd4;
+}
+
+.info-tag {
+    background-color: #00bcd4;
+    color: #1c273a;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+#question-area {
+    background-color: #2c3e50;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    border: 1px solid #00bcd4;
+    /* Sombra interna para destaque da área de pergunta */
+    box-shadow: inset 0 0 15px rgba(0, 188, 212, 0.4); 
+    width: 100%;
+    box-sizing: border-box; 
+}
+
+.question-text {
+    font-size: 1.4em;
+    font-weight: 600;
+    color: #f0f8ff;
+}
+
+.options-container {
+    width: 100%;
+    display: grid;
+    gap: 12px;
+    grid-template-columns: 1fr;
+    margin-bottom: 20px;
+}
+
+.option-btn {
+    background-color: #34495e; 
+    color: #f0f8ff;
+    text-align: left;
+    padding: 15px 20px;
+    font-size: 1em;
+    border: 2px solid transparent;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.option-btn:hover:not(.disabled) {
+    background-color: #496684;
+    border-color: #00bcd4;
+}
+
+.option-btn.correct {
+    background-color: #00ff3c; /* Verde forte */
+    border: 2px solid #00ff3c; /* Borda mais escura */
+    color: #ffffff; /* Texto branco */
+    pointer-events: none; /* Não clicável */
+}
+
+.option-btn.wrong {
+    background-color: #ff0019; /* Vermelho forte */
+    border: 2px solid #ff0019; /* Borda mais escura */
+    color: #ffffff; /* Texto branco */
+    pointer-events: none; /* Não clicável */
+}
+
+
+.option-btn.disabled {
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.next-btn {
+    background-color: #00bcd4; /* Ciano para ação de avançar */
+    color: #1c273a;
+    width: auto;
+    padding: 12px 30px;
+    margin-top: 10px;
+}
+
+.next-btn:hover {
+    background-color: #33e6ff;
+    box-shadow: 0 0 15px #00bcd4;
+}
+
+/* --- TELA DE RESULTADO --- */
+.final-score-box {
+    background-color: #2c3e50;
+    border: 2px solid #ffeb3b;
+    padding: 20px 40px;
+    border-radius: 10px;
+    margin: 20px 0 30px;
+    width: 60%;
+    max-width: 250px;
+    color: #ffeb3b;
+    box-shadow: 0 0 20px rgba(255, 235, 59, 0.5); /* Brilho Amarelo */
+}
+
+.final-score-box p {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+.score-display {
+    font-size: 3em;
+    font-weight: 700;
+    display: block;
+    margin-top: 5px;
+}
+
+/* --- TELA DE RANKING --- */
+.ranking-list {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+    margin-top: 25px;
+}
+
+.ranking-list li {
+    background-color: #34495e;
+    padding: 12px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.1em;
+    border-left: 5px solid #ffeb3b; /* Destaque lateral neon */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
+}
+
+.ranking-list li:hover {
+    transform: translateX(5px);
+}
+
+/* --- Responsividade --- */
+@media (max-width: 500px) {
+    .container {
+        padding: 20px;
+    }
+    h1 {
+        font-size: 1.8em;
+    }
+    .question-text {
+        font-size: 1.2em;
+    }
+    .option-btn {
+        font-size: 0.9em;
+        padding: 12px 15px;
+    }
+    .final-score-box {
+        width: 80%;
+        padding: 15px 30px;
+    }
+}
+/* Adicione este bloco no final do seu quiz-style.css */
+
+#explanation-area {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #34495e; /* Fundo escuro */
+    border-radius: 8px;
+    border-left: 5px solid #ffeb3b; /* Barra lateral Amarelo Neon */
+    text-align: left;
+    font-size: 0.95em;
+    color: #f0f8ff;
+    box-shadow: 0 0 10px rgba(255, 235, 59, 0.2); /* Sutil brilho neon */
+}
+
+#explanation-area strong {
+    color: #00bcd4; /* Ciano Neon para destacar "Resposta Correta" */
+    display: block;
+    margin-bottom: 5px;
+}
+/* Estilos para a Tela de Dificuldade */
+
+/* --- TELA DE DIFICULDADE (Melhorando Centralização) --- */
+#difficulty-screen {
+    text-align: center;
+    width: 100%;
+    max-width: 500px; 
+    margin: 0 auto; /* Garante que a tela de dificuldade se centralize dentro do container */
+}
+
+.difficulty-options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 25px auto; /* Adiciona 'auto' nas laterais para centralizar o bloco horizontalmente */
+    width: 100%; 
+    max-width: 400px; /* Opcional: define uma largura máxima para não ficar muito largo */
+}
+/* ... (o restante do CSS deve permanecer o mesmo) ... */
+
+#player-greeting-name {
+    color: #00bcd4; /* Ciano Neon */
+    font-weight: 700;
+}
+
+
+.difficulty-btn {
+    padding: 15px 20px;
+    font-size: 1.2em;
+    font-weight: 600;
+    color: #fff;
+    background-color: #34495e; /* Cor escura de fundo */
+    border: 2px solid transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s, transform 0.1s;
+}
+
+.difficulty-btn p {
+    font-size: 0.9em;
+    font-weight: 400;
+    margin: 5px 0 0;
+    color: #bdc3c7;
+}
+
+.difficulty-btn:hover {
+    background-color: #496279;
+    /* Adicionando um leve brilho dependendo do nível */
+    box-shadow: 0 0 15px rgba(0, 188, 212, 0.4); 
+}
+/* Estilos de cor mais específicos para as bolinhas (opcional) */
+.difficulty-btn[data-difficulty="Básico"] { border-color: #2ecc71; } /* Verde */
+.difficulty-btn[data-difficulty="Intermediário"] { border-color: #f1c40f; } /* Amarelo */
+.difficulty-btn[data-difficulty="Avançado"] { border-color: #e74c3c; } /* Vermelho */
+
+#back-to-home-from-difficulty {
+    margin-top: 20px;
+}

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz de Informática 💡</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container" id="quiz-container">
+
+        <div id="start-screen" class="screen">
+            <h1>Quiz de Informática 🧠</h1>
+            <p class="description">Teste seus conhecimentos sobre Hardware, Software e Internet!</p>
+
+            <div class="input-container">
+                <input type="text" id="quiz-player-name" placeholder="Digite seu nome (Opcional)">
+                <button id="start-quiz-btn" class="main-btn">Prosseguir</button>
+            </div>
+
+            <p class="info-text">30 Perguntas em 3 Níveis. Escolha seu desafio!</p>
+        </div>
+
+        <div id="difficulty-screen" class="screen" style="display: none;">
+            <h2>Olá, <span id="player-greeting-name">Jogador</span>!</h2>
+            <h3>Escolha seu Nível de Desafio</h3>
+
+            <div class="difficulty-options">
+                <button class="difficulty-btn" data-difficulty="Básico">
+                    Fase 1: BÁSICO 🟢
+                    <p>Conceitos e Periféricos.</p>
+                </button>
+                <button class="difficulty-btn" data-difficulty="Intermediário">
+                    Fase 2: INTERMEDIÁRIO 🟡
+                    <p>Hardware e Armazenamento.</p>
+                </button>
+                <button class="difficulty-btn" data-difficulty="Avançado">
+                    Fase 3: AVANÇADO 🔴
+                    <p>Redes, Segurança e Software.</p>
+                </button>
+            </div>
+            <button id="back-to-home-from-difficulty" class="secondary-btn">Voltar ao Início</button>
+        </div>
+
+        <div id="game-screen" class="screen" style="display: none;">
+            <div class="header-info">
+                <span id="question-count" class="info-tag">Pergunta 1/10</span>
+                <span id="quiz-score" class="info-tag">Pontos: 0</span>
+            </div>
+
+            <div id="question-area">
+                <p id="question-text" class="question-text">Aguardando carregamento da pergunta...</p>
+            </div>
+
+            <div id="options-container" class="options-container">
+                </div>
+
+            <div id="explanation-area" style="display: none;">
+                </div>
+
+            <div class="controls-area">
+                <button id="next-question-btn" class="next-btn" style="display: none;">
+                    Próxima Pergunta &raquo;
+                </button>
+            </div>
+        </div>
+
+        <div id="result-screen" class="screen" style="display: none;">
+            <h2>Fim de Jogo!</h2>
+            <p id="result-message" class="game-message">Você completou o quiz.</p>
+
+            <div class="final-score-box">
+                <p>Acertos:</p>
+                <span id="final-score" class="score-display">0</span>
+            </div>
+
+            <button id="play-again-quiz-btn" class="main-btn">Tentar Novamente</button>
+            <button id="view-ranking-btn" class="secondary-btn">Ver Ranking</button>
+            <button id="next-level-btn" class="main-btn" style="display:none;">Próximo Nível</button>
+
+        </div>
+
+        <div id="ranking-screen" class="screen" style="display: none;">
+            <h2>🏆 Melhores Jogadores</h2>
+            <ul id="quiz-ranking-list" class="ranking-list"></ul>
+            <button id="back-to-home-quiz-btn" class="secondary-btn">Voltar ao Início</button>
+        </div>
+
+    </div>
+
+    <script type="module" src="script.js"></script>
+</body>
+
+</html>
