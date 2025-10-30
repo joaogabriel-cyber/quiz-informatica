@@ -125,7 +125,7 @@ function checkAnswer(event) {
         explanationArea.style.display = 'none';
         currentQuestionIndex++;
         loadQuestion();
-    }, 2000);
+    }, 10000);
 }
 
 function nextQuestion() {
