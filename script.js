@@ -103,11 +103,11 @@ function finishQuiz() {
         if (currentLevel === "Básico") {
             // Sempre avança do Básico para o Intermediário
             nextLevelBtn.style.display = 'block';
-            nextLevelBtn.textContent = 'Avançar para INTERMEDIÁRIO';
+            nextLevelBtn.textContent = 'Avançar para o INTERMEDIÁRIO';
         } else if (currentLevel === "Intermediário") {
             // Sempre avança do Intermediário para o Avançado
             nextLevelBtn.style.display = 'block';
-            nextLevelBtn.textContent = 'Avançar para AVANÇADO';
+            nextLevelBtn.textContent = 'Avançar para o AVANÇADO';
         } 
         else {
             // Se for o nível Avançado (último), esconde o botão
