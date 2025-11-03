@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz de Informática 💡</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css"> 
 </head>
 
 <body>
@@ -77,17 +77,36 @@
                 <p>Acertos:</p>
                 <span id="final-score" class="score-display">0</span>
             </div>
-
-            <button id="play-again-quiz-btn" class="main-btn">Tentar Novamente</button>
+            
+            <button id="view-mistakes-btn" class="secondary-btn" style="display:none;">
+                Ver Meus Erros (Gabarito)
+            </button> 
+            
             <button id="view-ranking-btn" class="secondary-btn">Ver Ranking</button>
+            
             <button id="next-level-btn" class="main-btn" style="display:none;">Próximo Nível</button>
 
+            <button id="play-again-quiz-btn" class="secondary-btn">Voltar ao início</button>
         </div>
-
+        
         <div id="ranking-screen" class="screen" style="display: none;">
             <h2>🏆 Melhores Jogadores</h2>
             <ul id="quiz-ranking-list" class="ranking-list"></ul>
-            <button id="back-to-home-quiz-btn" class="secondary-btn">Voltar ao Início</button>
+
+            <button id="reset-ranking-btn" class="secondary-btn reset-btn">
+                🚫 Resetar Ranking
+            </button>
+            
+            <button id="back-to-results-btn" class="secondary-btn">
+                Voltar aos Resultados
+            </button>
+        </div>
+
+        <div id="review-screen" class="screen" style="display: none;">
+            <h2>📝 O que você errou?</h2>
+            <ul id="review-list" class="review-list">
+            </ul>
+            <button id="back-from-review-btn" class="secondary-btn">Voltar aos Resultados</button>
         </div>
 
     </div>
