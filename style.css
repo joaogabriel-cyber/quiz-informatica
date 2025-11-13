@@ -9,22 +9,31 @@
 /* Estilos Gerais */
 body {
     font-family: 'Poppins', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
     margin: 0;
-    background-color: #1c273a;
     color: #f0f8ff;
-    background-image: linear-gradient(135deg, #1c273a 0%, #0d131f 100%);
-    padding: 20px;
+
+    /* Fundo tema informática */
+    background-color: #0a0f1c;
+    background-image:
+        url('./img/Dia-da-Informatica.png'),
+        linear-gradient(135deg, #ffffff 0%, #1166f8 100%);
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: overlay;
+    background-attachment: fixed; /* Fundo fixo */
+    
+    /* Remove scroll da body */
+    overflow: hidden;
 }
 
 .container {
+    position: fixed; /* Mantém a tela central fixa */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centraliza exatamente */
     background: rgba(44, 62, 80, 0.95);
     padding: 35px;
     border-radius: 15px;
-    /* Sombra e Brilho Neon (Ciano) */
     box-shadow: 0 15px 35px rgba(0, 188, 212, 0.3), 0 0 0 5px rgba(0, 188, 212, 0.5);
     width: 90%;
     max-width: 600px;
@@ -75,6 +84,28 @@ h2 {
     transition: border-color 0.3s, box-shadow 0.3s;
     margin-bottom: 15px;
     text-align: center;
+}
+
+/* --- BOTÃO DE DESISTIR --- */
+.quit-btn {
+    background-color: #ff5252; /* Vermelho Neon */
+    color: #ffffff;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    padding: 12px 25px;
+    font-size: 1.1em;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s, transform 0.2s;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.quit-btn:hover {
+    background-color: #ff6b6b;
+    box-shadow: 0 0 15px rgba(255, 82, 82, 0.7);
+    transform: translateY(-3px);
 }
 
 #quiz-player-name:focus {

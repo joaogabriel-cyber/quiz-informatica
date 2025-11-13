@@ -9,8 +9,8 @@ let filteredQuestions = [];
 let currentQuestionIndex = 0;
 let currentScore = 0;
 let playerName = "Jogador";
-let isAnswered = false; // Impede múltiplos cliques por pergunta
-let userErrors = []; // Array para armazenar as perguntas erradas
+let isAnswered = false; 
+let userErrors = []; 
 
 // Referências às telas e elementos de controle
 const startScreen = document.getElementById('start-screen');
@@ -29,8 +29,10 @@ const nextQuestionBtn = document.getElementById('next-question-btn');
 const questionCount = document.getElementById('question-count');
 const quizScoreDisplay = document.getElementById('quiz-score');
 const viewMistakesBtn = document.getElementById('view-mistakes-btn'); 
-// Variável global 'nextLevelBtn' que será usada
 const nextLevelBtn = document.getElementById('next-level-btn'); 
+
+// NOVO: Referência para o botão de desistir
+const quitBtn = document.getElementById('quit-btn'); 
 
 // Referências da Tela de Revisão e Ranking
 const reviewList = document.getElementById('review-list'); 
@@ -44,13 +46,11 @@ const backToResultsBtn = document.getElementById('back-to-results-btn');
 // =======================================================
 
 function showScreen(screenId) {
-    // Esconde todas as telas
     const screens = [startScreen, difficultyScreen, gameScreen, resultScreen, rankingScreen, reviewScreen];
     screens.forEach(screen => {
         if (screen) screen.style.display = 'none';
     });
 
-    // Mostra a tela desejada
     const screenElement = document.getElementById(screenId);
     if (screenElement) screenElement.style.display = 'flex';
 }
@@ -63,54 +63,33 @@ function startQuizHandler() {
 }
 
 function startLevel(difficulty) {
-    // 1. Filtra as perguntas
     filteredQuestions = quizData.filter(q => q.nivel === difficulty);
-    
-    // 2. Reseta o estado do jogo e erros
     currentQuestionIndex = 0;
     currentScore = 0;
-    userErrors = []; // Limpa o array de erros
+    userErrors = []; 
     quizScoreDisplay.textContent = `Pontos: ${currentScore}`;
-
-    // 3. Inicia o jogo
     showScreen('game-screen');
     loadQuestion();
 }
 
-// =======================================================
-// 2. FUNÇÕES DE NAVEGAÇÃO ENTRE TELAS
-// =======================================================
-
-// ... (outras funções da Seção 2)
-
 function finishQuiz() {
-    // 1. Salva a pontuação no localStorage
     saveScore(); 
-    
-    // 2. Lógica para ir para a tela de resultados
     document.getElementById('final-score').textContent = currentScore;
     
-    // 3. Mostra/Esconde o botão "Ver Meus Erros" baseado na contagem de erros
     if (viewMistakesBtn) {
         viewMistakesBtn.style.display = userErrors.length > 0 ? 'block' : 'none';
     }
     
-    // 4. LÓGICA CORRIGIDA: O botão aparece sempre que o quiz termina,
-    //    sem depender da pontuação (acertos >= 7).
     const currentLevel = filteredQuestions.length > 0 ? filteredQuestions[0].nivel : null;
     
     if (nextLevelBtn) {
         if (currentLevel === "Básico") {
-            // Sempre avança do Básico para o Intermediário
             nextLevelBtn.style.display = 'block';
             nextLevelBtn.textContent = 'Avançar para o nível INTERMEDIÁRIO';
         } else if (currentLevel === "Intermediário") {
-            // Sempre avança do Intermediário para o Avançado
             nextLevelBtn.style.display = 'block';
             nextLevelBtn.textContent = 'Avançar para o nível AVANÇADO';
-        } 
-        else {
-            // Se for o nível Avançado (último), esconde o botão
+        } else {
             nextLevelBtn.style.display = 'none';
         }
     }
@@ -118,7 +97,6 @@ function finishQuiz() {
     showScreen('result-screen');
 }
 
-// ... (resto da Seção 2)
 
 // =======================================================
 // 3. LÓGICA DO JOGO (PERGUNTA E RESPOSTA)
@@ -221,7 +199,7 @@ function showReviewScreen() {
 
 
 // =======================================================
-// 5. LÓGICA DE RANKING (SALVAMENTO, EXIBIÇÃO E RESET)
+// 5. LÓGICA DE RANKING
 // =======================================================
 
 function getRanking() {
@@ -242,7 +220,6 @@ function saveScore() {
     ranking.sort((a, b) => b.score - a.score); 
 
     const topRanking = ranking.slice(0, 10);
-
     localStorage.setItem(RANKING_STORAGE_KEY, JSON.stringify(topRanking));
 }
 
@@ -288,41 +265,32 @@ function resetRanking() {
 // 6. EVENT LISTENERS
 // =======================================================
 
-// Botão Iniciar (Tela 1 -> Tela 2)
 document.getElementById('start-quiz-btn').addEventListener('click', startQuizHandler);
 
-// Botões de Nível (Tela 2 -> Tela 3)
 document.querySelectorAll('.difficulty-btn').forEach(button => {
     button.addEventListener('click', (e) => startLevel(e.currentTarget.dataset.difficulty));
 });
 
-// Botão Voltar ao Início da tela de dificuldade
 document.getElementById('back-to-home-from-difficulty').addEventListener('click', () => showScreen('start-screen'));
 
-// Botão de Próxima Pergunta
 nextQuestionBtn.addEventListener('click', () => {
     currentQuestionIndex++;
     loadQuestion();
 });
 
-// Botão Tentar Novamente (Tela Resultados -> Tela Início)
 document.getElementById('play-again-quiz-btn').addEventListener('click', () => showScreen('start-screen')); 
 
-// Botão Ver Erros/Revisão (Tela Resultados -> Tela Revisão)
 if (viewMistakesBtn) {
     viewMistakesBtn.addEventListener('click', showReviewScreen);
 }
 
-// Botão Voltar da Revisão (Tela Revisão -> Tela Resultados)
 const backFromReviewBtn = document.getElementById('back-from-review-btn');
 if (backFromReviewBtn) {
     backFromReviewBtn.addEventListener('click', () => showScreen('result-screen'));
 }
 
-// Botão Ver Ranking (Tela Resultados -> Tela Ranking)
 document.getElementById('view-ranking-btn').addEventListener('click', displayRanking); 
 
-// 🎯 CORREÇÃO AQUI: Usa a variável global nextLevelBtn (já declarada em 1)
 if (nextLevelBtn) {
     nextLevelBtn.addEventListener('click', () => {
         const currentLevel = filteredQuestions.length > 0 ? filteredQuestions[0].nivel : null;
@@ -339,14 +307,26 @@ if (nextLevelBtn) {
     });
 }
 
-// Botão Resetar Ranking
 if (resetRankingBtn) {
     resetRankingBtn.addEventListener('click', resetRanking);
 }
 
-// Botão Voltar aos Resultados (Tela Ranking -> Tela Resultados)
 if (backToResultsBtn) {
     backToResultsBtn.addEventListener('click', () => showScreen('result-screen'));
+}
+
+// 🟥 NOVO: BOTÃO DESISTIR
+if (quitBtn) {
+    quitBtn.addEventListener('click', () => {
+        const confirmQuit = confirm("Tem certeza que deseja desistir e voltar ao início?");
+        if (confirmQuit) {
+            currentQuestionIndex = 0;
+            currentScore = 0;
+            filteredQuestions = [];
+            userErrors = [];
+            showScreen('start-screen');
+        }
+    });
 }
 
 // Inicia a aplicação na tela inicial
